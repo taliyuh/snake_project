@@ -1,3 +1,4 @@
+//class for running the game
 #include "Game.h"
 #include "MainMenu.h"
 #include <SFML/Graphics/CircleShape.hpp>
@@ -13,9 +14,9 @@ Game::~Game(){
 }
 
 void Game::Run(){
-    sf::CircleShape shape (100.f);
-    shape.setFillColor(sf::Color::Green);
 
+
+//to limit actions per secod
     sf::Clock clock;
     sf::Time timeSinceLastFrame = sf::Time::Zero;
 

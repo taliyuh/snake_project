@@ -1,3 +1,4 @@
+//class representing snake
 #include "Snake.h"
 #include "Snake2.h"
 
@@ -12,6 +13,7 @@ Snake::~Snake()
 
 }
 
+//generating snake
 void Snake::Init(const sf::Texture& texture){
     float x = 16.f;
     float y = 16.f;
@@ -21,6 +23,8 @@ void Snake::Init(const sf::Texture& texture){
         x += 16.f;
     }
 }
+
+//moving the snake
 void Snake::Move(const sf::Vector2f& direction){
     m_tail->setPosition(m_head->getPosition() + direction);
     m_head = m_tail;
@@ -30,9 +34,13 @@ void Snake::Move(const sf::Vector2f& direction){
         m_tail = m_body.begin();
     }
 }
+
+//checking for collision with objects
 bool Snake::IsOn(const sf::Sprite& other) const{
     return other.getGlobalBounds().intersects(m_head->getGlobalBounds());
 }
+
+//increasing the lenght
 void Snake::Grow(const sf::Vector2f& direction){
     sf::Sprite newPiece;
     newPiece.setTexture(*(m_body.begin()->getTexture()));
@@ -47,6 +55,7 @@ void Snake::Grow3(const sf::Vector2f& direction){
     m_head = m_body.insert(++m_head, newPiece);}
 }
 
+//checking for self-intersection
 bool Snake::IsSelfIntersecting() const {
     bool flag = false;
     for(auto piece = m_body.begin(); piece != m_body.end(); ++piece){

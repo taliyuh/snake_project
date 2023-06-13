@@ -1,3 +1,4 @@
+//responsible for the main gameplay
 #include "GamePlay.h"
 #include "GameOver.h"
 #include <SFML/Window/Event.hpp>
@@ -19,13 +20,14 @@ GamePlay::~GamePlay()
 
 }
 
+//loading textures from the game, effects of fruits
 void GamePlay::Init(){
     m_context->m_assets->AddTexture(GRASS, "assets/textures/grass.png", true);
-    m_context->m_assets->AddTexture(SNAKE, "C:/Users/bartl/Downloads/untitled4/untitled4/assets/textures/snake.png");
-    m_context->m_assets->AddTexture(FRUIT1, "C:/Users/bartl/Downloads/untitled4/untitled4/assets/textures/fruit1.png");
-    m_context->m_assets->AddTexture(FRUIT2, "C:/Users/bartl/Downloads/untitled4/untitled4/assets/textures/fruit2.png");
-    m_context->m_assets->AddTexture(FRUIT3, "C:/Users/bartl/Downloads/untitled4/untitled4/assets/textures/fruit3.png");
-    m_context->m_assets->AddTexture(WALL, "C:/Users/bartl/Downloads/untitled4/untitled4/assets/textures/wall.png", true);
+    m_context->m_assets->AddTexture(SNAKE, "assets/textures/snake.png");
+    m_context->m_assets->AddTexture(FRUIT1, "assets/textures/fruit1.png");
+    m_context->m_assets->AddTexture(FRUIT2, "assets/textures/fruit2.png");
+    m_context->m_assets->AddTexture(FRUIT3, "assets/textures/fruit3.png");
+    m_context->m_assets->AddTexture(WALL, "assets/textures/wall.png", true);
 
     m_grass.setTexture(m_context->m_assets->GetTexture(GRASS));
     m_grass.setTextureRect(m_context->m_window->getViewport(m_context->m_window->getDefaultView()));
@@ -61,6 +63,8 @@ void GamePlay::Init(){
     m_FRuffectText.setCharacterSize(15);
     m_FRuffectText.setPosition(m_context->m_window->getSize().x/3, m_context->m_window->getSize().y/10 -35.f );
 }
+
+//making the app closeable, moving the snake
 void GamePlay::ProcessInput(){
     sf::Event event;
     while(m_context->m_window->pollEvent(event)){
@@ -107,6 +111,8 @@ void GamePlay::ProcessInput(){
     }
 
 }
+
+//effect of one of the fruit
 void GamePlay::TeleportSnake() {
     sf::Vector2f snakeHeadPosition = m_snake.GetHeadPosition();
     sf::Vector2f windowSize = sf::Vector2f(m_context->m_window->getSize());
@@ -128,14 +134,11 @@ void GamePlay::TeleportSnake() {
     m_snake.GetHead()->setPosition(snakeHeadPosition);
 }
 
-
-
-
+//responsible for ending game, generating new fruits
 void GamePlay::Update(sf::Time deltaTime) {
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
     m_elapsedTime += deltaTime;
     if (m_elapsedTime.asSeconds() > 0.1) {
-        bool isOnWall = false;
         for (auto& wall : m_walls) {
             if (!m_canTeleport) {
                 if (m_snake.IsOn(wall)) {
@@ -185,12 +188,6 @@ void GamePlay::Update(sf::Time deltaTime) {
             x = std::clamp<int>(rand() % (maxX - minX) + minX, minX, maxX);
             y = std::clamp<int>(rand() % (maxY - minY) + minY, minY, maxY);
 
-            // Make sure fruit2 is not at the same position as fruit1
-//            while (x == m_fruit1.getPosition().x && y == m_fruit1.getPosition().y) {
-//                x = std::clamp<int>(rand() % m_context->m_window->getSize().x, 14, rand() % m_context->m_window->getSize().x - 2 * 14);
-//                y = std::clamp<int>(rand() % m_context->m_window->getSize().y, 14, rand() % m_context->m_window->getSize().y - 2 * 14);
-//            }
-
             m_fruit2.setPosition(x, y);
             m_randomNumber = std::rand() % 10;
             m_score += 3;
@@ -229,6 +226,7 @@ void GamePlay::Update(sf::Time deltaTime) {
     }
 }
 
+//just drawing everything
 void GamePlay::Draw(){
     m_context->m_window->clear();
     m_context->m_window->draw(m_grass);

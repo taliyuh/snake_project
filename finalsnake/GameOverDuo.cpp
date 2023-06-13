@@ -1,3 +1,5 @@
+//very similar to GameOver, but we added displaying scores
+
 #include "GameOverDuo.h"
 #include "GamePlayDuo.h"
 #include "SoloDuo.h"

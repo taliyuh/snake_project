@@ -15,7 +15,7 @@ GameOver::~GameOver()
 
 }
 
-
+//setting text
 void GameOver::Init(){
     m_context -> m_assets -> AddFont(MAIN_FONT, "assets/fonts/Righteous-Regular.ttf");
     //Over Title
@@ -42,6 +42,8 @@ void GameOver::Init(){
     m_exitButton.setPosition(m_context->m_window->getSize().x / 2 - 5, m_context->m_window->getSize().y / 2 + 75.f);
     m_exitButton.setCharacterSize(20);
 }
+
+//processing input from the user, as you probably have guessed by the class name
 
 void GameOver::ProcessInput(){
     sf::Event event;
@@ -123,6 +125,9 @@ void GameOver::ProcessInput(){
         }
     }
 }
+
+//changing the style of the buttons
+
 void GameOver::Update(sf::Time deltaTime){
     if(m_isRetryButtonSelected){
         m_retryButton.setFillColor(sf::Color::Yellow);
@@ -158,6 +163,9 @@ void GameOver::Update(sf::Time deltaTime){
         m_context->m_window->close();
     }
 }
+
+//drawing buttons and texts
+
 void GameOver::Draw(){
     m_context->m_window->clear(sf::Color::Blue);
     m_context->m_window->draw(m_gameOverTitle);

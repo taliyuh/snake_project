@@ -1,3 +1,4 @@
+//class for creating fonts and textures
 #include "AssetMan.h"
 
 Engine::AssetMan::AssetMan(){
@@ -8,6 +9,7 @@ Engine::AssetMan::~AssetMan(){
 
 }
 
+//load texture from file
 void Engine::AssetMan::AddTexture(int id, const std::string& filePath, bool wantRepeated){
     auto texture = std::make_unique<sf::Texture>();
 
@@ -17,6 +19,7 @@ void Engine::AssetMan::AddTexture(int id, const std::string& filePath, bool want
     }
 }
 
+//load font from file
 void Engine::AssetMan::AddFont(int id, const std::string& filePath){
     auto Font = std::make_unique<sf::Font>();
 
@@ -25,6 +28,7 @@ void Engine::AssetMan::AddFont(int id, const std::string& filePath){
     }
 }
 
+//getters
 const sf::Texture& Engine::AssetMan::GetTexture(int id) const{
     return *(m_textures.at(id).get());
 }

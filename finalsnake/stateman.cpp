@@ -1,3 +1,4 @@
+//switching before different states of the game
 #include "stateman.h"
 
 Engine::StateMan::StateMan() : m_add(false), m_replace(false), m_remove(false)

@@ -1,5 +1,5 @@
+//main menu of the game
 #include "MainMenu.h"
-//#include "GamePlay.h"
 #include "SoloDuo.h"
 #include <string>
 #include <SFML/Window/Event.hpp>

@@ -1,3 +1,4 @@
+//in similar fashion to GamePlay, but for duo mode
 #include "GamePlayDuo.h"
 #include "GameOverDuo.h"
 #include <SFML/Window/Event.hpp>
